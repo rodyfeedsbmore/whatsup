@@ -1,0 +1,39 @@
+---
+/* src/pages/index.astro - no server-side JS needed here */
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>Astro</h1>
+
+    <div id="db-status">Checking DB...</div>
+    <button id="db-check-btn">Check DB Now</button>
+
+    <script>
+async function checkDb() {
+  const el = document.getElementById('db-status');
+  try {
+    const res = await fetch('/api/db-check');
+    const text = await res.text();
+    // try parse JSON if possible
+    try {
+      const data = JSON.parse(text);
+      el.textContent = 'JSON: ' + JSON.stringify(data);
+    } catch {
+      el.textContent = 'RAW RESPONSE: ' + text.slice(0, 1000);
+    }
+  } catch (err) {
+    el.textContent = 'Fetch error: ' + (err.message || err);
+    console.error(err);
+  }
+}
+document.getElementById('db-check-btn').addEventListener('click', checkDb);
+checkDb();
+</script>
+  </body>
+</html>
