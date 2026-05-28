@@ -6,7 +6,9 @@ import './login.css'
 ---
 
 <form action="#" method="post" autocomplete="off" novalidate class="login_form">
-    <h1>Login</h1>
+    <h1 class="signuporlogin">
+
+    </h1>
     <p class="displayMessage">Enter your email and password below</p>
 
     <div class="login_input">
@@ -28,32 +30,54 @@ import './login.css'
         <a href="/forgot-password">Forgot Password?</a>
     </div>
 
-    <button class="login_input btn" type="submit">Sign in</button>
+    <button class="login_input btn" type="submit"></button>
 
     <p>
         Need an account? &nbsp; &nbsp; <a href="/signup">Sign up</a>
     </p>
+
+    
 
     <script is:inline type="module">
 
         // login helper function
         import loginHelper from "/src/lib/utils/loginHelper.js"
 
-        // btn selected from DOM to handle Form logic
+        // constant for form logic 
+        const url = window.location.pathname.split('/').filter(Boolean).pop() || '';
+        
         const btn = document.querySelector('.btn');
         const form = document.querySelector('form');
         const displayLoginMessage = document.querySelector('.displayMessage');
 
+        window.addEventListener('DOMContentLoaded', () => {
+
+            const signuporlogin = document.querySelector('.signuporlogin');
+
+            if (signuporlogin) signuporlogin.textContent = url === 'signup' ? 'Sign Up' : 'Log In';
+            
+        });
+
+        (() => btn.textContent = url === 'signup' ? 'Sign Up' : 'Log In')();
         
 
         // event listener to grab the form
         btn.addEventListener('click', async (e) => {
             e.preventDefault(); // stop page refreshing on click
-            const result = await loginHelper(form)
-            console.log(result)
-            if (result) {
-                displayLoginMessage.innerHTML = result.message
+            
+            if( url === "login" ) {
+                const result = await loginHelper(form);
+
+                if (result) {
+                    displayLoginMessage.innerHTML = result.message
+                }
             }
+
+            if( url === "signup" ) {
+                console.log('write later')
+            }
+          
+            
         })
 
     </script>

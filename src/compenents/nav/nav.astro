@@ -12,12 +12,29 @@ import './nav.css'
 
 <nav class="nav">
 
-    <a class="logo">
-        <h1>Whassup!</h1>
-    </a>
+  <a class="logo">
+    <h1>Whassup!</h1>
+  </a>
 
-    <ul>
-        <li>Login</li>
-    </ul>
+  <ul>
+    <li>
+      <a href="/" class="auth-link"></a>
+    </li>
+  </ul>
 
 </nav>
+
+<script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+
+    const authLink = document.querySelector('.auth-link');
+
+    const page = window.location.pathname.split('/').filter(Boolean).pop() || '';
+
+    if (authLink) {
+        authLink.textContent = page === 'signup' ? 'Log In' : 'Sign Up';
+        authLink.href = page === 'signup' ? '/login' : '/signup';
+    }
+
+  });
+</script>
