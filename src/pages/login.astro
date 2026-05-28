@@ -1,0 +1,26 @@
+---
+/* src/pages/index.astro - no server-side JS needed here */
+
+// global css
+import '../styles/global.css';
+
+// login compenents
+import "../compenents/login/login.css"
+
+// compenents
+import Nav from '../compenents/nav/nav.astro';
+import LoginForm from '../compenents/login/login.astro';
+
+
+---
+
+<!doctype html>
+
+<html lang="en">
+
+    <Nav />
+
+    <LoginForm />
+    
+
+</html>

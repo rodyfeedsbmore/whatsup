@@ -1,43 +1,30 @@
 ---
 /* src/pages/index.astro - no server-side JS needed here */
+
+import '../styles/global.css';
+import Nav from '../compenents/nav/nav.astro'
+
+
 ---
 <!doctype html>
+
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Astro</title>
+	</head>
+	<body>
+		<Nav/>
+		<ul>
+			<li>Can Login and Logout securely</li>
+			<li>when log in, call see all posts</li>
+		</ul>
 
-    <div id="db-status">Checking DB...</div>
-    <button id="db-check-btn">Check DB Now</button>
+	
 
-    <button id="create-post">
-  Create Post
-</button>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('create-post');
-
-    btn?.addEventListener('click', async () => {
-      const res = await fetch('/api/create-post', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          author: 'Rody',
-          body: 'hello world',
-        }),
-      });
-
-      console.log(await res.json());
-    });
-  });
-</script>
-2. Confirm the butt
-  </body>
+		<script is:inline>
+		
+		</script>
+	</body>
 </html>
